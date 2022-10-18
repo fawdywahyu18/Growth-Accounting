@@ -175,3 +175,45 @@ dict_result[list_sheet[1]].to_excel(writer, sheet_name='Sumatra Selatan')
 dict_result[list_sheet[2]].to_excel(writer, sheet_name='Bali')
 writer.save()
 
+# Pembagian periode per grup dan dibuat tabel
+def average_growth(input_df, frekuensi='AS'):
+    # input_df = dict_result['Bali_2010p']
+    tahun_awal = input_df['Tahun'][0]
+    tahun_awal_str = tahun_awal.astype(str)
+    input_df['date_index'] = pd.date_range(start=f'{tahun_awal_str}-01-01', 
+                                           periods=np.size(input_df, axis=0), 
+                                           freq=frekuensi)
+    input_df.set_index('date_index', inplace=True)
+    input_df = input_df.drop(columns=['Tahun'])
+    input_df_slice = input_df.iloc[:,:4]
+    # indeks_waktu = input_df.index
+    # tahun_akhir_dt = indeks_waktu[-1]
+    
+    list_pembagian_waktu = [(input_df.index>=f'{tahun_awal_str}-01-01') & (input_df.index<'2000-01-01'),
+                            (input_df.index>='2000-01-01') & (input_df.index<'2010-01-01'),
+                            (input_df.index>='2010-01-01') & (input_df.index<'2020-01-01'),
+                            input_df.index>='2020-01-01']
+    list_nama_grup = ['1990an', '2000an', '2010an', '2020an']
+    
+    rata2_per_grup = {}
+    for t in range(len(list_pembagian_waktu)):
+        time_cond = list_pembagian_waktu[t]
+        data_potong = input_df_slice.loc[time_cond]
+        rata2_per_kolom = np.mean(data_potong, axis=0)
+        rata2_per_grup[list_nama_grup[t]] = rata2_per_kolom
+    
+    result_df_rata2 = pd.DataFrame(rata2_per_grup)
+    return result_df_rata2
+
+dict_result_tabel = {}
+for s in range(len(list_sheet)):
+    df_olah = dict_result[list_sheet[s]]
+    hasil_tabel = average_growth(df_olah, 'AS')
+    dict_result_tabel[list_sheet[s]] = hasil_tabel
+
+writer = pd.ExcelWriter(wd+'/Output Software Tabel Rata2.xlsx')
+dict_result_tabel[list_sheet[0]].to_excel(writer, sheet_name='Jawa Barat')
+dict_result_tabel[list_sheet[1]].to_excel(writer, sheet_name='Sumatra Selatan')
+dict_result_tabel[list_sheet[2]].to_excel(writer, sheet_name='Bali')
+writer.save()
+
