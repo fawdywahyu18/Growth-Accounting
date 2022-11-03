@@ -147,17 +147,19 @@ def growth_rate(input_file, nlag=1):
     return output_file
 
 def output_software_new(prov_share_input, output_growth_input, capital_growth_input,
-                        labor_growth_input, tfp_growth_input, date_input):
+                        labor_growth_input, tfp_growth_input, kapital_input, date_input):
     result_dict = {
         'Tahun' : date_input,
         'pertumbuhan output' : output_growth_input,
         'pertumbuhan capital' : capital_growth_input * (prov_share_input[0]/100),
         'pertumbuhan labor' : (prov_share_input[1]/100)*labor_growth_input,
         'pertumbuhan TFP' : tfp_growth_input,
+        'estimasi kapital' : kapital_input,
         'peran kapital labor tech' : np.array(prov_share_input)
         }
     result_df = pd.DataFrame(dict([ (k,pd.Series(v)) for k,v in result_dict.items() ]))
     return result_df
+
 
 # Running function
 wd_backup = ''
@@ -184,7 +186,7 @@ for i in range(len(list_sheet)):
     tfp_growth = output_growth - (provinsi_share[0]/100)*capital_growth - (provinsi_share[1]/100)*labor_growth
     
     hasil_tfp = output_software_new(provinsi_share, output_growth, capital_growth, 
-                                    labor_growth, tfp_growth, df_input['Date'])
+                                    labor_growth, tfp_growth, kapital_prov_pim, df_input['Date'])
     dict_result[list_sheet[i]] = hasil_tfp
     
 writer = pd.ExcelWriter(wd+'/Output Software Tahunan.xlsx')
@@ -225,7 +227,7 @@ for i in range(len(list_sheet_q)):
     tfp_growthq = output_growthq - (provinsi_shareq[0]/100)*capital_growthq - (provinsi_shareq[1]/100)*labor_growthq
     
     hasil_tfpq = output_software_new(provinsi_shareq, output_growthq, capital_growthq, 
-                                     labor_growthq, tfp_growthq, df_sadj_q.index)
+                                     labor_growthq, tfp_growthq, kapital_prov_pimq, df_sadj_q.index)
     dict_result_q[list_sheet_q[i]] = hasil_tfpq
 
 writer = pd.ExcelWriter(wd+'/Output Software Triwulan.xlsx')
