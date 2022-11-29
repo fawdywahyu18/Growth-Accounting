@@ -9,4 +9,4 @@ Decomposing factors that affect economic growth in Indonesian provinces
 
 # Panduan
 Contoh cara melakukan running script ada di folder 'Example'
-Consoth hasil output package ada di filder 'Example Output'
+Contoh hasil output package ada di filder 'Example Output'
