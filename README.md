@@ -5,7 +5,7 @@ Decomposing factors that affect economic growth in Indonesian provinces
 1. Download dan install miniconda3
 2. Buka Anaconda Prompt
 3. Ubah direktori kerja sesuai keinginan. Contohnya adalah `cd C:\Fawdy`
-4. Buat virtual environment dengan command `conda create -n venv_name`
+4. Buat virtual environment dengan command `conda create -n venv_name` kemudian muncul 'Proceed?' ketik `y`
 5. Aktifkan virtual environment dengan cara `conda activate venv_name`
 6. Install git untuk bisa akses github dengan cara `conda install -c anaconda git` kemudian muncul 'Proceed?' ketik `y`
 
@@ -18,3 +18,7 @@ Decomposing factors that affect economic growth in Indonesian provinces
 ## Panduan
 1. Contoh cara melakukan running script ada di folder 'Example'
 2. Contoh hasil output package ada di folder 'Example Output'
+
+## Apabila ingin running menggunakan contoh data untuk riset
+1. Pindah direktori ke folder example dengan cara `cd C:\Fawdy\Growth-Accounting`
+2. Pastikan virtual environment tetap aktif. Kemudian ketik pada terminal `python run_growth_accounting.py`
