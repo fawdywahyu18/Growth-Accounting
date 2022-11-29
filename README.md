@@ -19,6 +19,6 @@ Decomposing factors that affect economic growth in Indonesian provinces
 1. Contoh cara melakukan running script ada di folder 'Example'
 2. Contoh hasil output package ada di folder 'Example Output'
 
-## Apabila ingin running menggunakan contoh data untuk riset
+## Apabila ingin running menggunakan contoh data sama dengan riset
 1. Pindah direktori ke folder example dengan cara `cd C:\Fawdy\Growth-Accounting`
 2. Pastikan virtual environment tetap aktif. Kemudian ketik pada terminal `python run_growth_accounting.py`
