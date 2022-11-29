@@ -13,7 +13,7 @@ Decomposing factors that affect economic growth in Indonesian provinces
 1. Mengunduh file dengan cara `git clone https://github.com/fawdywahyu18/Growth-Accounting.git`
 2. cd ke folder yang memiliki file setup
 3. buat dan aktivkan virtual environment
-4. pastikan virtual environment aktif, kemudian `pip install -e .`
+4. pastikan virtual environment aktif, kemudian `pip install -e .` Tunggu instalasi sampai selesai dan sukses.
 
 ## Panduan
 1. Contoh cara melakukan running script ada di folder 'Example'
